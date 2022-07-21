@@ -1,6 +1,7 @@
 package exampleWindoHandle;
 
 import java.awt.Desktop.Action;
+import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +18,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class ExampleWIndowHandle {
+import utils.Driver;
+
+
+public class ExampleWIndowHandle extends Driver {
 
 	public WebDriver driver;
 	public JavascriptExecutor jseExecutor; 
 
-	
+	@Parameters({"browser"})
 	@BeforeClass
-	public void setUp() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	public void setUp(String browser) throws MalformedURLException {
+		//driver = new ChromeDriver();
+		//driver.manage().window().maximize();
 		//Selenium 3 implicit wait	
 		//driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
 		//Selenium 4 implict wait
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver = initDriver(browser);
+		
 		driver.get("https://keybooks.ro/event/festival-of-old-films/");
 		jseExecutor =  (JavascriptExecutor)driver;
 	}
@@ -50,6 +57,7 @@ public class ExampleWIndowHandle {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("iframe"))));
 		WebElement iframe = driver.findElement(By.tagName("iframe"));
+		jseExecutor.executeScript("window.scrollBy(0,900)");
 		Actions action = new Actions(driver);
 		action.moveToElement(iframe).perform();
 		
@@ -59,14 +67,14 @@ public class ExampleWIndowHandle {
 		System.out.println(browserTabs.size());
 		System.out.println(browserTabs.get(0));
 		System.out.println(browserTabs.get(1));
-		Thread.sleep(5000);
+		/*Thread.sleep(5000);
 		
 		driver.switchTo().window(browserTabs.get(1));
 		String pageTitle =  driver.getTitle();
 		System.out.println("Page title :" + pageTitle);
 		driver.findElement(By.id("searchboxinput")).clear();
 		driver.findElement(By.id("searchboxinput")).sendKeys("Cluj");
-		driver.findElement(By.id("searchbox-searchbutton")).click();
+		driver.findElement(By.id("searchbox-searchbutton")).click(); */
 		
 		
 		WebDriver newTab = driver.switchTo().newWindow(WindowType.TAB);

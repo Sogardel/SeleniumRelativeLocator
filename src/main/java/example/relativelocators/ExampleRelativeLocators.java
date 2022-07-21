@@ -1,5 +1,7 @@
 package example.relativelocators;
 
+import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,19 +12,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class ExampleRelativeLocators {
+import net.bytebuddy.implementation.bytecode.Duplication;
+import utils.Driver;
+
+public class ExampleRelativeLocators extends Driver{
 
 	public WebDriver driver;
 	public JavascriptExecutor jseExecutor; 
 
-	
+	@Parameters({"browser"})
 	@BeforeClass
-	public void setUp() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+	public void setUp(String browser) throws MalformedURLException {
+		//driver = new ChromeDriver();
+		//driver.manage().window().maximize();
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver = initDriver(browser);
 		driver.get("https://keybooks.ro/");
 		jseExecutor =  (JavascriptExecutor)driver;
 	}
@@ -32,7 +39,7 @@ public class ExampleRelativeLocators {
 		Thread.sleep(4000);
 		driver.quit();
 	}
-	
+
 	@Test
 	public void relativeLocators() throws InterruptedException {
 		

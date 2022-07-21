@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" thread-count="2" >
+   
+    <test name="Same browser test" verbose = "1">
+    <parameter name = "browser" value = "firefox" />
+        <classes>
+           <class name="example.relativelocators.ExampleRelativeLocators" ></class>
+        </classes>
+    </test>
+
+</suite>
