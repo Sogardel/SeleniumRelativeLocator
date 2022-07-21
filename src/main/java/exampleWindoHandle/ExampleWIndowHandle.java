@@ -28,10 +28,11 @@ public class ExampleWIndowHandle extends Driver {
 
 	public WebDriver driver;
 	public JavascriptExecutor jseExecutor; 
+	String browser = System.getProperty("browser");
 
-	@Parameters({"browser"})
+	//@Parameters({"browser"})
 	@BeforeClass
-	public void setUp(String browser) throws MalformedURLException {
+	public void setUp() throws MalformedURLException {
 		//driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 		//Selenium 3 implicit wait	
@@ -62,7 +63,7 @@ public class ExampleWIndowHandle extends Driver {
 		action.moveToElement(iframe).perform();
 		
 		driver.switchTo().frame(iframe);
-		driver.findElement(By.partialLinkText("map")).click();
+		driver.findElement(By.cssSelector("div[class='google-maps-link']")).click();
 		List<String> browserTabs = new ArrayList<>(driver.getWindowHandles());
 		System.out.println(browserTabs.size());
 		System.out.println(browserTabs.get(0));

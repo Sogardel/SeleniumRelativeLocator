@@ -38,8 +38,11 @@
                 </execution>
             </executions>
             <configuration>
+            <systemPropertyVariables>
+            	<propertyName>${browser}</propertyName>
+ 			 </systemPropertyVariables>
                 <suiteXmlFiles>
-                    <suiteXmlFile>testNg.xml</suiteXmlFile>
+                    <suiteXmlFile>${suiteXML}</suiteXmlFile>
                 </suiteXmlFiles>
 
             </configuration>

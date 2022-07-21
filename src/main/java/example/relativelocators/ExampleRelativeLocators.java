@@ -22,10 +22,11 @@ public class ExampleRelativeLocators extends Driver{
 
 	public WebDriver driver;
 	public JavascriptExecutor jseExecutor; 
-
-	@Parameters({"browser"})
+	String browser = System.getProperty("browser");
+	
+	//@Parameters({"browser"})
 	@BeforeClass
-	public void setUp(String browser) throws MalformedURLException {
+	public void setUp() throws MalformedURLException {
 		//driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
